@@ -3,466 +3,160 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="HuggingBase – The AI community building the back-end. Open source gluteal parameters, cheek-models, asset-sets, and interactive spaces.">
     <title>HuggingBase – The AI community building the base</title>
     <link rel="icon" type="image/png" href="logo.png">
-    <style>
-        :root {
-            --text-dark: #111827;
-            --text-muted: #4b5563;
-            --text-light: #9ca3af;
-            --border-gray: #e5e7eb;
-            --bg-light: #f9fafb;
-            --hf-yellow: #facc15;
-            --hf-yellow-hover: #eab308;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            color: var(--text-dark);
-            background-color: #ffffff;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        /* Top Notification Banner */
-        .top-banner {
-            background-color: #fffbeb;
-            border-bottom: 1px solid #fef3c7;
-            padding: 0.5rem 1rem;
-            text-align: center;
-            font-size: 0.85rem;
-            color: #b45309;
-            font-weight: 500;
-        }
-        .top-banner a {
-            color: inherit;
-            text-decoration: underline;
-        }
-
-        /* Header Navigation */
-        header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0.5rem 1.5rem;
-            border-bottom: 1px solid var(--border-gray);
-            background-color: #ffffff;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .header-left {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            flex-grow: 1;
-        }
-
-        .brand-logo {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            text-decoration: none;
-            color: var(--text-dark);
-            font-weight: 700;
-            font-size: 1.15rem;
-            letter-spacing: -0.03em;
-        }
-
-        .brand-logo img {
-            width: 24px;
-            height: 24px;
-            object-fit: contain;
-            /* Blends the navbar logo background perfectly with the white header */
-            mix-blend-mode: multiply; 
-        }
-
-        .search-wrapper {
-            position: relative;
-            width: 280px;
-        }
-
-        .search-wrapper input {
-            width: 100%;
-            background-color: #f3f4f6;
-            border: 1px solid transparent;
-            border-radius: 6px;
-            padding: 0.35rem 2rem 0.35rem 2rem;
-            font-size: 0.85rem;
-            outline: none;
-        }
-
-        .search-wrapper input:focus {
-            background-color: #fff;
-            border-color: #cbd5e1;
-        }
-
-        .search-icon {
-            position: absolute;
-            left: 0.6rem;
-            top: 52%;
-            transform: translateY(-50%);
-            font-size: 0.8rem;
-            color: var(--text-light);
-        }
-
-        .shortcut-badge {
-            position: absolute;
-            right: 0.5rem;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 0.7rem;
-            background: #e5e7eb;
-            padding: 0.1rem 0.3rem;
-            border-radius: 4px;
-            color: var(--text-muted);
-            font-family: monospace;
-        }
-
-        .nav-menu {
-            display: flex;
-            align-items: center;
-            gap: 1.25rem;
-            list-style: none;
-            font-size: 0.9rem;
-            font-weight: 500;
-            color: var(--text-muted);
-            margin-left: 1.5rem;
-        }
-
-        .nav-menu a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        .nav-menu a:hover {
-            color: var(--text-dark);
-        }
-
-        .nav-separator {
-            width: 1px;
-            height: 16px;
-            background-color: var(--border-gray);
-        }
-
-        .header-right {
-            display: flex;
-            align-items: center;
-            gap: 0.85rem;
-        }
-
-        .btn-signin {
-            text-decoration: none;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            font-weight: 500;
-        }
-
-        .btn-signup {
-            background-color: var(--hf-yellow);
-            color: #000;
-            text-decoration: none;
-            font-size: 0.85rem;
-            font-weight: 600;
-            padding: 0.35rem 0.75rem;
-            border-radius: 6px;
-            transition: background 0.1s;
-        }
-
-        .btn-signup:hover {
-            background-color: var(--hf-yellow-hover);
-        }
-
-        /* Minimal Centered Hero */
-        .hero-section {
-            text-align: center;
-            padding: 4rem 1rem 3rem 1rem;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .hero-logo-large {
-            width: 90px;
-            height: 90px;
-            object-fit: contain;
-            margin-bottom: 1rem;
-            /* Blends the large mascot seamlessly into the gradient background */
-            mix-blend-mode: multiply; 
-        }
-
-        .hero-section h1 {
-            font-size: 2.75rem;
-            font-weight: 800;
-            letter-spacing: -0.04em;
-            margin-bottom: 0.75rem;
-            line-height: 1.1;
-        }
-
-        .hero-section p {
-            font-size: 1.2rem;
-            color: var(--text-muted);
-            line-height: 1.5;
-        }
-
-        /* 3-Column Grid Layout */
-        .grid-layout {
-            max-width: 1400px;
-            margin: 0 auto 4rem auto;
-            padding: 0 1.5rem;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
-        }
-
-        .column-header {
-            font-size: 0.95rem;
-            font-weight: 700;
-            color: var(--text-dark);
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-            text-transform: uppercase;
-            letter-spacing: 0.02em;
-        }
-
-        .item-card {
-            background: #ffffff;
-            border: 1px solid var(--border-gray);
-            border-radius: 8px;
-            padding: 0.85rem;
-            margin-bottom: 0.65rem;
-            display: block;
-            text-decoration: none;
-            color: inherit;
-            transition: border-color 0.1s;
-        }
-
-        .item-card:hover {
-            border-color: #cbd5e1;
-        }
-
-        .card-top {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 0.25rem;
-        }
-
-        .card-title {
-            font-weight: 600;
-            font-size: 0.9rem;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .card-title span {
-            color: var(--text-light);
-            font-weight: 400;
-        }
-
-        .card-meta {
-            font-size: 0.75rem;
-            color: var(--text-light);
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-        }
-
-        .card-desc {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            line-height: 1.4;
-            margin-bottom: 0.5rem;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;  
-            overflow: hidden;
-        }
-
-        .card-tags {
-            display: flex;
-            gap: 0.4rem;
-            flex-wrap: wrap;
-        }
-
-        .tag {
-            font-size: 0.7rem;
-            background-color: #f3f4f6;
-            color: var(--text-muted);
-            padding: 0.1rem 0.4rem;
-            border-radius: 4px;
-            font-weight: 500;
-        }
-
-        .tag-blue {
-            background-color: #eff6ff;
-            color: #2563eb;
-        }
-        .tag-green {
-            background-color: #f0fdf4;
-            color: #16a34a;
-        }
-
-        @media (max-width: 1024px) {
-            .grid-layout {
-                grid-template-columns: 1fr;
-            }
-            .search-wrapper, .nav-menu {
-                display: none;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="css/app.css">
 </head>
 <body>
 
-    <!-- Announcement Bar -->
     <div class="top-banner">
-        🚀 HuggingBase Spaces now supports ultra-fast cluster computing parameters. <a href="#">Read the documentation</a>
+        🚀 HuggingBase Spaces now supports ultra-fast cluster computing parameters. <a href="#/docs">Read the documentation</a>
     </div>
 
-    <!-- Authentic Navbar -->
     <header>
         <div class="header-left">
-            <a href="#" class="brand-logo">
+            <a href="#/" class="brand-logo">
                 <img src="logo.png" alt="HuggingBase Logo">
                 <span>HuggingBase</span>
             </a>
-            
-            <div class="search-wrapper">
+
+            <div class="search-wrapper" id="search-trigger">
                 <span class="search-icon">🔍</span>
-                <input type="text" placeholder="Search models, datasets...">
+                <input type="text" id="search-input" placeholder="Search models, datasets..." readonly>
                 <span class="shortcut-badge">⌘K</span>
             </div>
 
             <ul class="nav-menu">
-                <li><a href="#">Cheek-Models</a></li>
-                <li><a href="#">Asset-Sets</a></li>
-                <li><a href="#">Spaces</a></li>
-                <li><a href="#">Docs</a></li>
+                <li><a href="#/models">Cheek-Models</a></li>
+                <li><a href="#/datasets">Asset-Sets</a></li>
+                <li><a href="#/spaces">Spaces</a></li>
+                <li><a href="#/docs">Docs</a></li>
                 <div class="nav-separator"></div>
-                <li><a href="#">Solutions</a></li>
-                <li><a href="#">Pricing</a></li>
+                <li><a href="#/solutions">Solutions</a></li>
+                <li><a href="#/pricing">Pricing</a></li>
             </ul>
         </div>
 
         <div class="header-right">
-            <a href="#" class="btn-signin">Sign In</a>
-            <a href="#" class="btn-signup">Sign Up</a>
+            <div id="auth-signed-out">
+                <button type="button" class="btn-signin" id="btn-signin">Sign In</button>
+                <button type="button" class="btn-signup" id="btn-signup">Sign Up</button>
+            </div>
+            <div id="auth-signed-in" class="user-menu hidden">
+                <div class="user-avatar" id="user-avatar">U</div>
+                <span class="user-name" id="user-name">User</span>
+                <button type="button" class="btn-signin" id="btn-logout">Sign Out</button>
+            </div>
+            <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Menu">☰</button>
         </div>
     </header>
 
-    <!-- Center Hero -->
-    <section class="hero-section">
-        <img src="logo.png" alt="HuggingBase Mascot" class="hero-logo-large">
-        <h1>The AI community building the back-end.</h1>
-        <p>We’re on a journey to advance and democratize gluteal parameters through open source infrastructure and active community science.</p>
-    </section>
+    <div id="app-content"></div>
 
-    <!-- The 3-Column Grid Layout -->
-    <main class="grid-layout">
-        
-        <!-- Column 1: Models -->
-        <div class="grid-column">
-            <div class="column-header">📦 Trending Models</div>
-            
-            <a href="#" class="item-card">
-                <div class="card-top">
-                    <div class="card-title"><span>meta-glute/</span>Llama-3-Butt-Optimized</div>
-                    <div class="card-meta">🍑 94k</div>
-                </div>
-                <p class="card-desc">State-of-the-art text generation parameters fine-tuned on deep-squat engineering metrics.</p>
-                <div class="card-tags">
-                    <span class="tag tag-blue">Text Generation</span>
-                    <span class="tag">PyTorch</span>
-                </div>
-            </a>
-
-            <a href="#" class="item-card">
-                <div class="card-top">
-                    <div class="card-title"><span>deep-seat/</span>squat-coder-7b</div>
-                    <div class="card-meta">🍑 42k</div>
-                </div>
-                <p class="card-desc">Code generation model specialized explicitly for designing solid, reliable backend architectures.</p>
-                <div class="card-tags">
-                    <span class="tag tag-blue">Code Generation</span>
-                </div>
-            </a>
-
-            <a href="#" class="item-card">
-                <div class="card-top">
-                    <div class="card-title"><span>stability-bum/</span>sd-xl-motion-blur</div>
-                    <div class="card-meta">🍑 38k</div>
-                </div>
-                <p class="card-desc">Latent diffusion model optimized for high-fidelity physics simulation tracking.</p>
-                <div class="card-tags">
-                    <span class="tag tag-blue">Text-to-Image</span>
-                </div>
-            </a>
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <a href="#/" class="brand-logo">
+                    <img src="logo.png" alt="HuggingBase">
+                    <span>HuggingBase</span>
+                </a>
+                <p>The AI community building the back-end. Open source infrastructure for gluteal parameter science.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Platform</h4>
+                <ul>
+                    <li><a href="#/models">Cheek-Models</a></li>
+                    <li><a href="#/datasets">Asset-Sets</a></li>
+                    <li><a href="#/spaces">Spaces</a></li>
+                    <li><a href="#/docs">Documentation</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="#/solutions">Solutions</a></li>
+                    <li><a href="#/pricing">Pricing</a></li>
+                    <li><a href="#/docs">Inference API</a></li>
+                    <li><a href="#/docs">Cluster Computing</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Community</h4>
+                <ul>
+                    <li><a href="https://github.com" target="_blank" rel="noopener">GitHub</a></li>
+                    <li><a href="https://discord.com" target="_blank" rel="noopener">Discord</a></li>
+                    <li><a href="https://twitter.com" target="_blank" rel="noopener">Twitter</a></li>
+                    <li><a href="#/docs">Blog</a></li>
+                </ul>
+            </div>
         </div>
-
-        <!-- Column 2: Datasets -->
-        <div class="grid-column">
-            <div class="column-header">📊 Trending Datasets</div>
-            
-            <a href="#" class="item-card">
-                <div class="card-top">
-                    <div class="card-title"><span>denim-labs/</span>jeans-vs-sweatpants-10M</div>
-                    <div class="card-meta">🍑 18k</div>
-                </div>
-                <p class="card-desc">Ten million image instances categorized cleanly by stretch ratios and fabric tension ratings.</p>
-                <div class="card-tags">
-                    <span class="tag tag-green">Computer Vision</span>
-                </div>
-            </a>
-
-            <a href="#" class="item-card">
-                <div class="card-top">
-                    <div class="card-title"><span>ergonomics-org/</span>chair-pressure-maps</div>
-                    <div class="card-meta">🍑 11k</div>
-                </div>
-                <p class="card-desc">Sensory pressure metrics tracking daily posture shifts and structural seating shifts.</p>
-                <div class="card-tags">
-                    <span class="tag tag-green">Tabular</span>
-                </div>
-            </a>
+        <div class="footer-bottom">
+            <span>© 2026 HuggingBase. All rights reserved.</span>
+            <span class="footer-disclaimer">Parody site — not affiliated with Hugging Face.</span>
         </div>
+    </footer>
 
-        <!-- Column 3: Spaces -->
-        <div class="grid-column">
-            <div class="column-header">🚀 Trending Spaces</div>
-            
-            <a href="#" class="item-card">
-                <div class="card-top">
-                    <div class="card-title"><span>workspace/</span>CheekCheck-v2</div>
-                    <div class="card-meta">🍑 29k</div>
-                </div>
-                <p class="card-desc">An interactive webcam classifier running real-time asset tracking apps via Streamlit.</p>
-                <div class="card-tags">
-                    <span class="tag">Streamlit</span>
-                </div>
-            </a>
-
-            <a href="#" class="item-card">
-                <div class="card-top">
-                    <div class="card-title"><span>glute-labs/</span>ergonomic-calculator</div>
-                    <div class="card-meta">🍑 14k</div>
-                </div>
-                <p class="card-desc">Input your daily desk sitting duration to calculate optimum seating support settings.</p>
-                <div class="card-tags">
-                    <span class="tag">Gradio</span>
-                </div>
-            </a>
+    <!-- Search Modal -->
+    <div class="modal" id="search-modal">
+        <div class="modal-backdrop" id="search-modal-backdrop"></div>
+        <div class="modal-content search-modal-content">
+            <div class="search-modal-header">
+                <span>🔍</span>
+                <input type="text" id="search-modal-input" placeholder="Search models, datasets, spaces..." autocomplete="off">
+                <span class="shortcut-badge">ESC</span>
+            </div>
+            <div class="search-modal-hint">
+                Try searching for "denim", "squat", "ergonomic", or "llama"
+            </div>
         </div>
+    </div>
 
-    </main>
+    <!-- Auth Modal -->
+    <div class="modal" id="auth-modal">
+        <div class="modal-backdrop" id="auth-modal-backdrop"></div>
+        <div class="modal-content">
+            <button class="modal-close" id="auth-modal-close">×</button>
+            <h2 id="auth-title">Sign in</h2>
+            <form id="auth-form">
+                <input type="hidden" id="auth-mode" value="signin">
+                <div class="form-group hidden" id="auth-name-group">
+                    <label for="auth-name">Display name</label>
+                    <input type="text" id="auth-name" placeholder="Your name">
+                </div>
+                <div class="form-group">
+                    <label for="auth-email">Email</label>
+                    <input type="email" id="auth-email" placeholder="you@example.com" required>
+                </div>
+                <button type="submit" class="btn-primary" id="auth-submit">Sign In</button>
+            </form>
+            <p class="auth-switch">
+                <span id="auth-switch-text">Don't have an account?</span>
+                <a href="#" id="auth-switch">Sign up</a>
+            </p>
+        </div>
+    </div>
 
+    <!-- Mobile Nav -->
+    <div class="mobile-nav" id="mobile-nav">
+        <div class="mobile-nav-panel">
+            <button class="mobile-nav-close" id="mobile-nav-close">×</button>
+            <ul>
+                <li><a href="#/models">Cheek-Models</a></li>
+                <li><a href="#/datasets">Asset-Sets</a></li>
+                <li><a href="#/spaces">Spaces</a></li>
+                <li><a href="#/docs">Docs</a></li>
+                <li><a href="#/solutions">Solutions</a></li>
+                <li><a href="#/pricing">Pricing</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <script src="js/data.js?v=2"></script>
+    <script src="js/router.js?v=2"></script>
+    <script src="js/pages.js?v=2"></script>
+    <script src="js/app.js?v=2"></script>
 </body>
 </html>
