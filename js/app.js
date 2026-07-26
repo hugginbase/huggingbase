@@ -28,12 +28,20 @@ const App = {
 
   registerRoutes() {
     Router.register('/', () => this.render(Pages.home()));
-    Router.register('/models', () => this.render(Pages.models()));
-    Router.register('/datasets', () => this.render(Pages.datasets()));
-    Router.register('/spaces', () => this.render(Pages.spaces()));
+    Router.register('/models', (_, q) => this.render(Pages.models(null, q)));
+    Router.register('/datasets', (_, q) => this.render(Pages.datasets(null, q)));
+    Router.register('/spaces', (_, q) => this.render(Pages.spaces(null, q)));
     Router.register('/models/:org/:name', (p) => this.render(Pages.modelDetail(p.org, p.name)));
     Router.register('/datasets/:org/:name', (p) => this.render(Pages.datasetDetail(p.org, p.name)));
     Router.register('/spaces/:org/:name', (p) => this.render(Pages.spaceDetail(p.org, p.name)));
+    Router.register('/organizations', () => this.render(Pages.organizations()));
+    Router.register('/organizations/:org', (p) => this.render(Pages.organizationDetail(p.org)));
+    Router.register('/blog', () => this.render(Pages.blog()));
+    Router.register('/blog/:slug', (p) => this.render(Pages.blogPost(p.slug)));
+    Router.register('/collections', () => this.render(Pages.collections()));
+    Router.register('/collections/:id', (p) => this.render(Pages.collectionDetail(p.id)));
+    Router.register('/papers', () => this.render(Pages.papers()));
+    Router.register('/leaderboard', () => this.render(Pages.leaderboard()));
     Router.register('/docs', () => this.render(Pages.docs()));
     Router.register('/pricing', () => this.render(Pages.pricing()));
     Router.register('/solutions', () => this.render(Pages.solutions()));
@@ -168,6 +176,10 @@ const App = {
       });
     });
 
+    document.querySelectorAll('[data-follow-org]').forEach((btn) => {
+      btn.addEventListener('click', () => this.toast('Following organization! 🍑'));
+    });
+
     document.querySelectorAll('[data-download]').forEach((btn) => {
       btn.addEventListener('click', () => {
         this.toast('Download started... (just kidding, this is a parody site)');
@@ -206,7 +218,9 @@ const App = {
     const grid = document.getElementById('browse-grid');
     if (!grid) return;
     const type = grid.dataset.type;
+    const taskFilter = grid.dataset.task || '';
     let items = [...HB_DATA[type]];
+    if (taskFilter) items = items.filter((i) => (i.task || i.sdk) === taskFilter);
 
     if (query) {
       const q = query.toLowerCase();
